@@ -1,0 +1,125 @@
+---
+title: "Assignment 8"
+author: "Sri Harsha Sudalagunta"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Problem 1.
+
+(a)
+Given
+margin of error = 0.2
+confidence level = 0.98
+Significance level = 1- Confidence level = 1-0.98 = 0.02
+Critical Value at alpha = 0.02 is 2.508
+using conservative value p = 0.50
+
+```{r}
+me = 0.02
+p = 0.5
+alpha = 0.02
+z = qnorm(1-alpha/2)
+
+
+n = ((z*z)*(p)*(1-p))/(me^2)
+n
+
+```
+
+
+The sample size required is 3383
+```{r}
+n = 3383
+p = 20
+total = n*p
+total
+
+```
+The minimum amount required is 67660
+
+(b) 
+
+If the researcher uses fewer subjects the confidence interval will be wider.
+
+Rationale : as the sample size and margin of error are inversely proportional.The decrease in the sample size can increase the margin of error, which widens the confidence interval.
+
+## Problem 2.
+
+The necessary changes made to the csv and uploaded to the r studio
+
+```{r}
+# Load the dataset from a CSV file
+mydata <- read.csv("C:\\Users\\SRI HARSHA S\\Downloads\\lung_cancer.csv")
+mydata
+
+
+```
+
+
+
+## Problem 3
+
+The attached pdf have the kaplanmeier estimates made using the excel
+```{r}
+kapdata <- read.csv("C:\\Users\\SRI HARSHA S\\OneDrive - Indiana University\\Documents\\R\\kpmeier_hand.csv")
+
+kapdata
+```
+
+
+
+
+## Problem 4.
+
+
+In the attached pdf, we have the log rank test done using the excel. Based on the test statistic i.e., 10.7 we can reject the null hypothesis i.e., two survival curves are equal.
+
+
+```{r}
+logdata <- read.csv("C:\\Users\\SRI HARSHA S\\OneDrive - Indiana University\\Documents\\R\\logrank_hand.csv")
+logdata
+```
+
+
+## Problem 5.
+
+
+The log rank test using the r studio
+
+```{r}
+library(survival)
+survdiff(Surv(Days, followup_code) ~ smoke_code, data = mydata)
+        
+```
+Based on the test statistic and p value we can reject the null hypothesis i.e., equal survival curves for the smokers and non smokers, as the statistic value is greater than the critical value.
+```{r}
+
+
+newdata <- data.frame(age = 60, gender = "female", smoking = 1, cancer_stage = 2)
+surv_probs <- predict(cox_model, newdata, type = "survival")
+surv_func <- survfit(cox_model)
+surv_prob_12m <- summary(surv_func, times = 12)$surv
+
+```
+
+
+```{r}
+
+```
+
+## Problem 6.
+
+The Cox proportional hazards regression model from the data 
+```{r}
+coxph(Surv(Days, followup_code) ~ smoke_code, data = mydata)
+
+
+summary(coxph(Surv(Days, followup_code) ~ smoke_code, data = mydata))
+```
+In the cox proportional we can get the hazard ratio which we cannot get in the log rank test.

@@ -1,0 +1,276 @@
+---
+title: "Assignment 7"
+author: "Sri Harsha Sudalagunta"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Problem 1.
+
+(a)
+
+Form the given data, there exits a significant relationship between the both variables. The relationship is inversely proportional, with decrease in the one there is an increase in the other.
+
+(b) 
+
+Yes, I think its meaningful. But, The given intercept i.e., 4.9754, which mean that even when the resilience is zero, we can have the BDI score as 4.9754 which doesn't make more sense. It may look meaningful technically but not practically. 
+
+(c) 
+
+The slope of resLow is 9.6538 and the slope of resVeryLow is 15.6453, which mean that the person with resVeryLow can have 6 points high BDI score than the person with resLow resilience.
+
+(d) 
+
+Yes based on the given statistic test value i.e., 118.1 and p-value <0.05, there exists an relationship between both of the variables.
+(e) 
+
+i) 
+There will be a high BDI score with the very low when compared to the low resilience which is in line with the previously mentioned study. But, the difference between the groups is same here but difference between categories is different in the previous study.
+
+ 
+ii)
+This imply that difference in the score between the groups is the i.e., 2.76 points. But, the differnce is varied between the groups in the previous study.
+
+iii)
+Because it treats the resilience categories as numerical, in which the difference between the groups is same. But in the reality case, the difference between the groups is different based on the category. so, this is the reason that i think the model is flawed.
+
+## Problem 2.
+
+(a) 
+
+I think chi-square test would be appropriate for the particular scenario.
+
+(b) 
+
+H0 : caffeinated coffee consumption and risk of depression in women are not related to each other
+
+H1 : caffeinated coffee consumption and risk of depression in women are related to each other
+
+(c) 
+
+The proportion of females who suffer from depression = 2607/50739
+
+```{r}
+2607/50739 
+```
+
+The females who is not suffering from depression is 48132/50739
+
+```{r}
+48132/50739
+
+```
+
+(d) 
+
+E = (total of row * total of column)/total count
+```{r}
+E = (2607*6617)/50739
+E
+```
+Contribution of the cell = (observed-expected)^2/expected
+```{r}
+C = (373-E)^2/E
+C
+```
+
+
+(e) 
+
+statistic value (q) = 20.93
+
+df  = (number of rows -1) * (number of columns-1) =  4
+
+```{r}
+test_value = 20.93
+df = 4
+pchisq(test_value, df, lower.tail = FALSE)
+```
+
+
+
+
+(f) 
+
+Based on the p value and test statistic we can assume that there exists a relationship between both of the variables.
+
+From the p-value and test statistic value, there exists a relationship between the risk of depression in women and caffeinated coffee consumption.
+
+(g)
+
+Yes, I think we cannot come to complete conclusion that coffee was being the causation of the depression because there may be confounding factors associated with that. Moreover, from this we can see that there is an association but not the causation.
+
+## Problem 3
+
+(a) 
+
+Yes, this data can be used . But, based on the sample size we cannot generalize I think.
+
+(b)
+
+Lets calculate do the table
+
+```{r}
+c_table <- matrix(c(100, 50, 20, 10, 17, 4), nrow = 2, byrow = TRUE)
+rownames(c_table) <- c("Sampled Claims", "No Allowed")
+colnames(c_table) <- c("Small", "Medium", "Large")
+observed_table = addmargins(c_table)
+observed_table
+```
+
+
+(c) 
+
+E value = (total of row * total of column)/total count
+```{r}
+E_val = (31*24)/201
+E_val
+```
+
+(d) 
+
+As the data counts are more than 10 and the data is in appropriate table format with categories, its use is justified.
+
+(e) 
+
+
+```{r}
+test_val = 12.93
+d_of_fre = 2
+pchisq(12.93 ,2, lower.tail = FALSE)
+
+```
+The p-value for the test of no association is 0.001
+
+(f) t)
+
+I think we can calculate the residuals by difference them with the observed and the expected(E) values 
+```{r}
+E <- margin.table(c_table, margin=1) %*% t(margin.table(c_table, margin=2)) / sum(c_table)
+E
+```
+Then subtracting the expected(E) form the residual(r)
+
+```{r}
+r <- (c_table - E) / sqrt(E)
+r
+```
+The Positive residuals represents greater than expected frequencies and negatives residuals indicates lower than expected frequency. The residuals are positive for the given data indicating higher than expected frequencies. The residuals have three negative and three positive values.
+
+
+## Problem 4.
+
+a)  
+
+we can assume an hypothesis
+
+H0 : Farm environment and risk of childhood asthma are not associated with each other.
+
+H1 : Farm environment and risk of childhood asthma are associated with each other.
+
+```{r}
+expo_asthma = 19 
+expo_noasthma = 966
+not_expo_asthma = 11566
+not_expo_noasthma = 263757
+
+
+c_table =  matrix(c(expo_asthma, expo_noasthma, not_expo_asthma, not_expo_noasthma),nrow = 2, byrow = TRUE, dimnames = list(c("Exposed farm", "Not Exposed farm"), c("Asthma_yes", "Asthma_no")))
+
+c_table
+```
+Lets do a chi-square test to see the values
+
+```{r}
+test_chi =  chisq.test(c_table)
+test_chi
+```
+
+The test statistic  is 11.41 and p-value is less than 0.05. so, based on this we can see that there is a relationship between both the variables.
+
+(b) 
+
+I think yes, the relative risk is an appropriate measure of association for these data. The sample is not on  development or diagnosed of the asthma but its on whether they are exposed or not exposed to farm animals. So, i think relative risk is an appropriate measure of association/
+
+
+(c)
+
+The findings of this study do not provide proof that being around farm animals lowers the chance of having asthma. The results only support a link between early exposure to farm animals and a decreased risk of developing asthma by age 6. This link might be influenced by additional variables or confounding factors associated with it. As it is a retrospective kind of study, the confounding factors may not be addressed.As the farm people work hard, due to which there can be changes in the genetic predisposition of the children form parents, instead of exposure to the farm animals.
+
+
+## Problem 5.
+
+(a) 
+
+lets do the odds ratio of the survival  = ad/bc
+
+```{r}
+a = 14
+d= 39
+b= 11
+c= 26
+o = (a*d)/(b*c)
+o
+```
+
+
+Lets see the relative risk of survival = (a/a+b)/(c/c+d)
+```{r}
+
+a = 14
+d= 39
+b= 26
+c= 11
+rr = (a/(a+b))/(c/(c+d))
+rr
+```
+
+(b) 
+
+The relative risk should always be used to compare the probability of success between two interventions because it is the more comprehensible and natural method. It is preferable in this situation and can be calculated in studies that are prospective. 
+
+## Problem 6.
+
+(a) 
+
+Based on the given information, lets do the chi square test and check the p-value.
+
+
+```{r}
+
+tea = matrix(c(17, 283, 30, 541), nrow = 2)
+rownames(tea) = c("Carcinoma", "No Carcinoma")
+colnames(tea) = c("Green Tea", " Doesn't drink Green Tea")
+test = chisq.test(tea)
+test
+
+```
+The p value is grater than 0.05 , its insufficient proof to reject the 
+H0 of no association.
+
+Based on this we can assume that they are independent of each other.
+
+(b) 
+
+I think finding out the odds ratio would be an appropriate measure.
+
+
+```{r}
+
+
+odds = (17/30)/ (283/541)
+odds
+```
+The odds ratio  is 1.08
+
+The odds ratio is more than 1, so lets calculate the percentage increase
+```{r}
+percentage_increase = (odds-1)*100
+percentage_increase
+```
+
+There is an 8.3% increase in odds for those who drink green tea regular than the other group.

@@ -1,0 +1,171 @@
+---
+title: "Assignment 6"
+author: "Sri Harsha Sudalagunta"
+date: "2023-04-02"
+output: pdf_document
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Problem 1.
+
+1.  (3 points)
+
+The following regression output is for predicting RFFT score of 500 randomly sampled individuals from the PREVEND data based on age (years) - 4Points.
+
+
+(a) Do these data provide statistically significant evidence at the α = 0.01 significance level that age is associated with RFFT score? State the null and alternative hypotheses, report the relevant p-value, and state your conclusion. (3 points) 
+```{r}
+library(oibiostat)
+data("prevend")
+regression = lm(prevend.samp$RFFT~prevend.samp$Age)
+summary(regression)
+
+```
+
+
+Yes, the data provided is statistically significant even when the alpha = 0.01 as the given p- value i.e., 0.000 is less then 0.01.
+
+Null Hypothesis: There is no change in RFFT score associated with a change in 1 year of age.
+
+H0 = 0
+
+Alternate Hypothesis: There is a change in RFFT score associated with a change in 1 year of age.
+
+HA != 0
+
+But, based on the given values there is a statistical evidence that age is negatively associated with RFFT score.
+
+
+
+(b) Compute and interpret a 99% confidence interval for the population slope. (1 point)
+
+```{r}
+confint(regression, level = 0.99)
+```
+With 99% confidence, the interval (-1.49, -1.03) points contains the population average difference in RFFT score between individuals who differ in age by 1 year; the older individual is predicted to have a lower RFFT score.
+
+## Problem 2.
+
+2.  (2 pts)
+
+The data collected from a random sample of 170 married couples in Britain, where both partners’ ages are below 65 years, and fits a model predicting wife’s age from husband’s age. Wife’s age has a mean of 40.68 years, with standard deviation 11.41 years. Husband’s age has a mean of 42.92 years, with standard deviation 11.76 years. From software, the residual standard error is s = 3.95 -- 4 Points.
+
+
+(a) Use the summary statistics to calculate a 95% confidence interval for the average age of wives whose husbands are 55 years old. (1 point)
+
+interval = X̄ ± t* (s/√n)
+interval = 55± 1.975(3.95/170) = 
+
+(b) You meet a married man from Britain who is 55 years old. Predict his wife’s age and give a 95% prediction interval for her age. (1 point) 
+
+(c) Repeat parts (a) and (b) using the approximate formulas for the appropriate standard errors (2 points)
+
+## Problem 3
+
+3. The Child Health and Development Studies investigate a range of topics. One study considered all pregnancies between 1960 and 1967 among women in the Kaiser Foundation Health Plan in the San Francisco East Bay area. The variable smoke is coded 1 if the mother is a smoker, and 0 if not. The variable parity is 1 if the child is the first born, and 0 otherwise. The summary table below shows the results of a linear regression model for predicting the average birth weight of babies, measured in ounces, based on the smoking status of the mother and whether the child is the first born. - 4 Points.
+
+(a) Write the equation of the regression model. (0.5 Point)
+
+As per the given data, the equation of regression model is 
+Regression Equation = 123.57 - 8.96(smoke)-1.98(parity)
+
+(b) Interpret the model slopes in the context of the data. (0.5 Point) 
+
+A child born to a mother who smokes has a birth weight about 9 ounces less, on average, than one born to a mother who does not smoke, holding birth order constant. A child who is the first born has birth weight about 2 ounces less, on average, than one who is not first born, when comparing children whose mothers were either both smokers or both nonsmokers. 
+
+(c) Calculate the estimated difference in mean birth weight for two infants born to non-smoking mothers, if one is first born and the other is not. (1 Point) 
+
+The birth weight of the infant born to mother who is non-smoker and the infant is 1st born is
+
+1st_born = 123.57 - 8.96(0)-1.98(1)
+1st-born = 121.59
+
+The birth weight of the infant born to mother who is non-smoker and the infant is not 1st born is
+
+2nd_born = 123.57 - 8.96(0)-1.98(0)
+2nd_born = 123.57
+
+Estimated difference in mean birth weight for two infants born = 121.59-123.57 = 1.98
+
+(d) Calculate the estimated difference in mean birth weight for two infants born to mothers who are smokers, if one is first born and the other is not. (1 Point)
+
+The birth weight of the infant born to mother who is smoker and the infant is 1st born is
+
+1st_born = 123.57 - 8.96(1)-1.98(1)
+1st-born = 112.63
+
+The birth weight of the infant born to mother who is smoker and the infant is not 1st born is
+
+2nd_born = 123.57 - 8.96(1)-1.98(0)
+2nd_born = 114.61
+
+Estimated difference in mean birth weight for two infants born = 112.63-114.61 = 1.98
+
+
+(e) Calculate the predicted mean birth weight for a first born baby born to a mother who is not a smoker (1 Point)
+
+The predicted weight for a first born baby is 
+
+Regression Equation = 123.57 - 8.96(0)-1.98(parity) = 121.59 ounces
+
+
+## Problem 4.
+
+4.
+
+(a) Write the equation of the regression model that includes all of the variables. (1 Points) 
+As the per the given information 
+Regression Equation = −80.41 + 0.44 (gestation) − 3.33(parity) − 0.01(age) + 1.15(height) + 0.05(weight) − 8.40(smoke). 
+
+(b) Interpret the slopes of gestation and age in this context. (0.5 Points)
+
+The model predicts a 0.44-ounce increase in the birth weight of the baby for each additional day of pregnancy, all else held constant. βage: The model predicts a 0.01 ounce decrease in the birth weight of the baby for each additional year in mother’s age, all else held constant. 
+
+
+(c) The coefficient for parity is different than in the linear model shown in the(previous question) Why might there be a difference? (1 Point)
+
+Parity might be correlated with one of the other variables in the model, which complicates model estimation.
+
+(d) Calculate the residual for the first observation in the data set. (0.5 Point) 
+
+baby weight = 120.58. e = 120 − 120.58 = −0.58.
+
+
+(e) The variance of the residuals is 249.28, and the variance of the birth weights of all babies in the data set is 332.57. Calculate the R2 and the adjusted R2. Note that there are 1,236 observations in the data set. (1 Point) 
+R 2 = 0.2504. R 2 adj = 0.2468.
+
+## Problem 5.
+
+5.(a) What proportion of the variability of a child’s systolic blood pressure is explained by this model? (0.5 Points) 
+
+The proportion of the variability of a child’s systolic blood pressure explained by the model is R-squared which is given as 0.597 or 59.7%.
+
+(b) Does the least squares line indicate statistically significant associations between each of the parent’s systolic blood pressures and that of the child? Explain your answer. (1 Point) 
+
+
+
+(c) What is the predicted systolic blood pressure for a child whose mother’s and father’s systolic blood pressure is 125 mm Hg and 140 mm Hg, respectively? (1 Point)
+
+As per the given regression equation, ie., = E(Y) = −15.69 + 0.415X1 + 0.423X2
+So the predicted systolic blood pressure = E(Y) = −15.69 + 0.415(125) + 0.423(140)= 95.405
+
+
+(d) A colleague tells you that something must be wrong with your model because your fitted intercept is negative, but blood pressures are never negative. How do you respond? (0.5 Point) 
+
+It is not incorrect to have a negative intercept, which means that the systolic blood pressure can be negative when the blood pressures of the mother and father are zero. The blood pressures cannot be zero in a real case, so i think it is okay to have  the negative intercept and which is right.
+
+(e) Briefly describe three different plots for assessing the appropriateness or fit of the above regression model.(1 Point) 
+
+Scatterplot: This plot can be used to visualize the relationship between the child's systolic blood pressure and the mother's and father's systolic blood pressure. If the points on the scatterplot appear to form a linear pattern, then it suggests that a linear regression model may be appropriate.
+
+Residual plot: This plot can be used to assess the adequacy of the model assumptions, such as linearity, constant variance, and normality of the errors. The residuals (observed minus predicted values) are plotted against the predicted values. If the residuals appear to be randomly scattered around zero, then it suggests that the model assumptions are met.
+
+Q-Q plot: This plot can also be used to assess the normality assumption of the errors. The standardized residuals (residuals divided by their estimated standard deviation) are plotted against the expected values from a standard normal distribution. If the points on the plot appear to follow a straight line, then it suggests that the normality assumption is met.
+
+

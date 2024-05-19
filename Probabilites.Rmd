@@ -1,0 +1,171 @@
+---
+title: "Assignment 3"
+author: "Sri Harsha Sudalagunta"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+##### Question 1
+
+(a) The expected number of smokers in a random sample of 100 students from this university are `r 13/100 * 100`
+```{r}
+13/100 * 100
+```
+
+(b) No, they are independent and it is unlikely to use the same approach for waking up early and going to gym and smoking.
+
+##### Question 2
+
+(a) The Probability of observing an 83 F temperature or higher in LA during a randomly choosen day in june is `r pnorm(83,77,5, lower.tail = FALSE)`
+```{r}
+pnorm(83,77,5, lower.tail = FALSE)
+```
+
+
+(b) The Coldest 10% of days during June in LA are `r  qnorm(0.10,77,5, lower.tail = TRUE)`.
+```{r}
+qnorm(0.10,77,5, lower.tail = TRUE)
+```
+
+
+##### Question 3
+
+(a) The Expected value, as both the O- and O+ can donate blood to O+ patient. The probability of individuals is `r 0.37 + 0.08`. The standard deviation is `r sqrt(0.45*15*0.55)`
+```{r}
+sqrt(0.45*15*0.55)
+```
+
+
+(b) The donors with O- blood can donate blood to O- patient. So, the probability is `r pbinom(3,15,0.08, lower.tail = FALSE)`
+```{r}
+pbinom(3,15,0.08, lower.tail = FALSE)
+```
+
+
+##### Question 4
+
+(a) The probability of exactly 60 stocks infected is `r dbinom(60,250,0.3)`
+```{r}
+dbinom(60,250,0.3)
+```
+
+(b) The probability of at most 60 stocks infected is `r pbinom(60,250,0.3)`
+```{r}
+ pbinom(60,250,0.3)
+```
+
+(c) The probability that at least 80 stocks are infected is `r pbinom(80,250,0.3, lower.tail = FALSE)`
+```{r}
+pbinom(80,250,0.3, lower.tail = FALSE)
+```
+
+(d) The 40% of 250 is `r 40/100 * 250`. To make sure that no more than 40% of the stocks are infected, we have to calculate its probability. So, its probability is `r pbinom(100, 250,0.3)`. Form the value we can say that its seems reasonable to take random sample of 250.
+```{r}
+pbinom(100, 250,0.3)
+```
+
+
+##### Question 5
+
+(a) The probability that an outcome Z is greater than 2.60 is `r pnorm(2.60, lower.tail = FALSE)`
+```{r}
+pnorm(2.60, lower.tail = FALSE)
+```
+
+(b) The probability that Z is less than 1.35 is `r pnorm(1.35)`
+```{r}
+pnorm(1.35)
+```
+
+(c) The Probability that Z is between -1.70 and 3.10 is `r pnorm(3.10) - pnorm(-1.70)`
+```{r}
+pnorm(3.10) - pnorm(-1.70)
+```
+
+(d) The upper 15 % of the distribution is `r qnorm(0.85)`
+```{r}
+qnorm(0.85)
+```
+
+(e) The lower 20% of the distribution is `r qnorm(0.20)`
+```{r}
+qnorm(0.20)
+```
+
+
+##### Question 6
+
+(a) The percent of triathletes in the group that he finish faster than is `r pnorm(4948,4313,583,lower.tail = FALSE)`
+```{r}
+pnorm(4948,4313,583,lower.tail = FALSE)
+```
+
+(b) The percent of triathletes in the group that she finish faster than is `r pnorm(5513,5261,807, lower.tail = FALSE)`
+```{r}
+pnorm(5513,5261,807, lower.tail = FALSE)
+```
+
+(c) The cut off time for the fastest 5% of atheletes in the men's group is `r qnorm(0.95, 4313, 583, lower.tail = FALSE)`
+```{r}
+qnorm(0.95, 4313, 583, lower.tail = FALSE)
+```
+
+(d) The cut off time for the slowest 10% of athletes in the women's group is `r qnorm(0.10, 5261,807, lower.tail = FALSE)`
+```{r}
+qnorm(0.10, 5261,807, lower.tail = FALSE)
+```
+
+
+##### Question 7
+
+(a) The data appear to be normally distributed as we can see around 65-70% of data lies with in the 1st standard deviation and almost 99% of the data lies with in 2nd and 3rd standard deviation.
+
+(b) The heights of the 25 female college students are normally distributed. The proper bell shape can be seen from the image. The distribution of the data appears to be normally distributed and the data follows the respective distribution- 68 % of the data with in the first standard deviation and almost remaining data with in the second and third standard deviations.
+
+##### Question 8
+
+(a) The expected cases of hyponatremia are `r 0.12*200`
+```{r}
+ 0.12*200
+```
+
+
+(b) The probability of more than 30 hyponatremia cases occuring is `r pbinom(30,200,0.12, lower.tail=FALSE)`
+```{r}
+pbinom(30,200,0.12, lower.tail=FALSE)
+```
+
+
+##### Question 9
+
+(a) The probability to have the first blue-eyed child as their third child is `r (0.125*(1-0.125)^2)`
+```{r}
+(0.125*(1-0.125)^2)
+```
+
+
+(b) The number of attempts to have their first blue child - mean is `r 1/0.125`. 
+```{r}
+1/0.125
+```
+
+The standard deviation is `r sqrt((1-0.125)/0.125^2)`.
+```{r}
+sqrt((1-0.125)/0.125^2)
+```
+
+
+##### Question 10
+
+(a) X can take on values between 1 through 6, while Y can take on values between 0 through 6. Thus, there are a total of 42 entries in the joint probability table. The entries that equal 0 correspond to where Y > X, since there cannot be more tails observed than the number of times the coin is flipped (which equals the outcome on the die). There are 5 + 4 + 3 + 2 + 1 = 15 such entries.
+
+(b) This is the probability that when a 1 is observed on the die, 0 tails are observed from 1 flip of the coin. P(X = 1, Y = 0) = (1/6)(1/2) = 1/12.
+
+(c) This is the probability that when a 1 is observed on the die, 2 tails are observed from 1 flip of the coin. As discussed in part a), this has probability 0.
+
+(d) This is the probability that when a 6 is observed on the die, 3 tails are observed from 6 flips of the coin. P(X = 6, Y = 3) = (1/6){6 \choose 3}(1/2)^3(1/2)^3 = (1/6)(0.3125) = 0.0521.
+```{r}
+    p.tails = 0.5
+    (1/6)*dbinom(3, 6, p.tails)
+```
+
